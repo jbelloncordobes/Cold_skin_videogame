@@ -6283,8 +6283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2b4f4cafa2a41f08232af3dfbe0956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayTimer
-  dayDuration: 15
-  nightDuration: 15
+  dayDuration: 5
+  nightDuration: 5
   isDay: 1
   timeRemaining: 0
 --- !u!4 &1241645406

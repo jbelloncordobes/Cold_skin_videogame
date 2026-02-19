@@ -1,26 +1,35 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class DayTimer : MonoBehaviour
 {
     [Header("Time Settings")]
-    public float dayDuration = 300f;
-    public float nightDuration = 300f;
+    public float dayDuration = 30f;
+    public float nightDuration = 30f;
 
     [Header("Current State")]
     public bool isDay = true;
     public float timeRemaining;
 
+    private bool isTransitioning = false;
+
+    void Awake()
+    {
+        // Use Awake instead of Start so it persists before anything else runs
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
         timeRemaining = dayDuration;
-
-        LoadUIScene();
+        StartCoroutine(LoadUISceneAsync());
     }
 
     void Update()
     {
+        if (isTransitioning) return;
+
         timeRemaining -= Time.deltaTime;
 
         if (timeRemaining <= 0f)
@@ -34,28 +43,63 @@ public class DayTimer : MonoBehaviour
 
     void TransitionToNight()
     {
-        Debug.Log("Night is coming...");
+        isTransitioning = true;
         isDay = false;
         timeRemaining = nightDuration;
-        SceneManager.LoadScene("NightScene", LoadSceneMode.Single);
-        LoadUIScene();
+        StartCoroutine(LoadSceneAndUI("NightScene"));
     }
 
     void TransitionToDay()
     {
-        Debug.Log("Day has come...");
+        isTransitioning = true;
         isDay = true;
         timeRemaining = dayDuration;
-        SceneManager.LoadScene("DayScene", LoadSceneMode.Single);
-        LoadUIScene();
+        StartCoroutine(LoadSceneAndUI("DayScene"));
     }
 
-    void LoadUIScene()
+    IEnumerator LoadSceneAndUI(string sceneName)
     {
-        // Only load if not already loaded
+        Debug.Log("Starting transition to: " + sceneName);
+
+        // Step 1 - Unload UIScene first cleanly
+        if (SceneManager.GetSceneByName("UIScene").isLoaded)
+        {
+            AsyncOperation unloadUI = SceneManager.UnloadSceneAsync("UIScene");
+            while (!unloadUI.isDone)
+                yield return null;
+            Debug.Log("UIScene unloaded");
+        }
+
+        // Step 2 - Load the gameplay scene
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync(
+            sceneName, LoadSceneMode.Single);
+        loadScene.allowSceneActivation = true;
+        while (!loadScene.isDone)
+            yield return null;
+        Debug.Log("GameScene loaded: " + sceneName);
+
+        // Step 3 - Wait one frame to let scene initialize
+        yield return null;
+
+        // Step 4 - Reload UIScene on top
+        AsyncOperation loadUI = SceneManager.LoadSceneAsync(
+            "UIScene", LoadSceneMode.Additive);
+        while (!loadUI.isDone)
+            yield return null;
+        Debug.Log("UIScene reloaded");
+
+        isTransitioning = false;
+    }
+
+    IEnumerator LoadUISceneAsync()
+    {
         if (!SceneManager.GetSceneByName("UIScene").isLoaded)
         {
-            SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
+            AsyncOperation loadUI = SceneManager.LoadSceneAsync(
+                "UIScene", LoadSceneMode.Additive);
+            while (!loadUI.isDone)
+                yield return null;
+            Debug.Log("UIScene loaded for first time");
         }
     }
 

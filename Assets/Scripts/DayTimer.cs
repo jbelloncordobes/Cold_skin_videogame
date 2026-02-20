@@ -54,7 +54,7 @@ public class DayTimer : MonoBehaviour
         isTransitioning = true;
         isDay = true;
         timeRemaining = dayDuration;
-        StartCoroutine(LoadSceneAndUI("DayScene"));
+        StartCoroutine(LoadSceneAndUI("3D_island_demo"));
     }
 
     IEnumerator LoadSceneAndUI(string sceneName)

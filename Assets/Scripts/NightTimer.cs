@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class DayTimer : MonoBehaviour
+public class NightTimer : MonoBehaviour
 {
     [Header("Time Settings")]
-    public float dayDuration = 30f;
+    public float nightDuration = 30f;
 
     [Header("Current State")]
     public float timeRemaining;
@@ -14,7 +14,7 @@ public class DayTimer : MonoBehaviour
 
     void Start()
     {
-        timeRemaining = dayDuration;
+        timeRemaining = nightDuration;
     }
 
     void Update()
@@ -26,11 +26,11 @@ public class DayTimer : MonoBehaviour
         if (timeRemaining <= 0f)
         {
             isTransitioning = true;
-            StartCoroutine(LoadNightScene("NightScene"));
+            StartCoroutine(LoadDayScene("3D_island_demo"));
         }
     }
 
-    IEnumerator LoadNightScene(string sceneName)
+    IEnumerator LoadDayScene(string sceneName)
     {
         Debug.Log("Starting transition to: " + sceneName);
 
@@ -45,7 +45,7 @@ public class DayTimer : MonoBehaviour
 
     public float GetTimeNormalized()
     {
-        return timeRemaining / dayDuration;
+        return timeRemaining / nightDuration;
     }
 
     // For access outsie the script

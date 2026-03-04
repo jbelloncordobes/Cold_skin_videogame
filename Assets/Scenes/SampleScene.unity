@@ -1242,8 +1242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4cf24e0a8254c079c771b5730240a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootOrigin: {fileID: 0}
-  playerCamera: {fileID: 0}
+  shootOrigin: {fileID: 1241356780}
+  playerCamera: {fileID: 963194227}
   tracerPrefab: {fileID: 0}
   playerInput: {fileID: 0}
   range: 100
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 90db2e6195a12fe4db357f6f6fbfb1a3, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 77dd75dfe633144ebb73de3ae2c12849, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1017217986
 Transform:
@@ -3514,10 +3514,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2021277942110106820, guid: 8116e2f15e2e24b4d9c4dc17e11fcbe8, type: 3}
-      propertyPath: attackRange
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2920069695296405979, guid: 2b2155d95e0c44de28cd9b721828b003, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.28
@@ -3565,6 +3561,10 @@ PrefabInstance:
     - target: {fileID: 9081030426035802899, guid: 2b2155d95e0c44de28cd9b721828b003, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021277942110106820, guid: 8116e2f15e2e24b4d9c4dc17e11fcbe8, type: 3}
+      propertyPath: attackRange
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

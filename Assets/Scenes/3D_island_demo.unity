@@ -1340,8 +1340,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 114, y: -70}
-  m_SizeDelta: {x: 200.39996, y: 114.400024}
+  m_AnchoredPosition: {x: 114, y: -65}
+  m_SizeDelta: {x: 200.3999, y: 114.400024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433060249
 MonoBehaviour:
@@ -1835,7 +1835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2b4f4cafa2a41f08232af3dfbe0956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayTimer
-  dayDuration: 30
+  dayDuration: 5
   timeRemaining: 0
 --- !u!1 &564647933
 GameObject:

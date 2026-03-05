@@ -6284,8 +6284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayTimer
   dayDuration: 5
-  nightDuration: 5
-  isDay: 1
   timeRemaining: 0
 --- !u!4 &1241645406
 Transform:
@@ -6653,7 +6651,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 881744231, guid: e26cffa6e1ece4b2b85b50e69654deae, type: 3}
+  m_Sprite: {fileID: -26453697, guid: e26cffa6e1ece4b2b85b50e69654deae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

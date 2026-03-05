@@ -26,7 +26,7 @@ public class DayTimer : MonoBehaviour
         if (timeRemaining <= 0f)
         {
             isTransitioning = true;
-            StartCoroutine(LoadNightScene("NightScene"));
+            StartCoroutine(LoadNightScene("SampleScene"));
         }
     }
 

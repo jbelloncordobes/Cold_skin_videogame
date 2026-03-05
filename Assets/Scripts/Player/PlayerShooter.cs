@@ -26,6 +26,20 @@ public class PlayerShooter : MonoBehaviour
 
         if (playerInput != null)
             fireAction = playerInput.actions["Fire"];
+
+        // Auto-load BulletTracer prefab from Resources if not assigned in Inspector
+        if (tracerPrefab == null)
+        {
+            GameObject loaded = Resources.Load<GameObject>("BulletTracer");
+            if (loaded != null)
+                tracerPrefab = loaded.GetComponent<BulletTracer>();
+            else
+                Debug.LogWarning("[PlayerShooter] BulletTracer prefab not found in Resources folder.");
+        }
+
+        // Auto-find camera if not assigned
+        if (playerCamera == null)
+            playerCamera = Camera.main;
     }
 
     void Update()

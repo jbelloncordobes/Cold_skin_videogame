@@ -73,6 +73,7 @@ public class EnemyAStarAI : MonoBehaviour
         if (distance <= attackRange)
         {
             agent.isStopped = true;
+            animator?.SetFloat("speed", 0f);
 
             if (attackTimer <= 0f)
             {
@@ -84,6 +85,7 @@ public class EnemyAStarAI : MonoBehaviour
         else
         {
             agent.isStopped = false;
+            animator?.SetFloat("speed", agent.velocity.magnitude);
         }
     }
 }

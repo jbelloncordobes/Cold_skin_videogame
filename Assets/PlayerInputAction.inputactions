@@ -19,7 +19,7 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "1c4e7e3a-8f2b-4d5c-9a1e-6b7c8d9e0f1a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -37,7 +37,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "4e5f6a7b-8c9d-0e1f-2a3b-4c5d6e7f8a9b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

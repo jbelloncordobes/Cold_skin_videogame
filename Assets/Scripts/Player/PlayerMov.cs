@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
             moveAction = playerInput.actions["Move"];
             jumpAction = playerInput.actions["Jump"];
         }
+
+
     }
 
     void Update()

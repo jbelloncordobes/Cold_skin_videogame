@@ -10,6 +10,8 @@ public class AnimosityBar : MonoBehaviour
 	public float value;
 	public TMP_Text animosityText;
 	public TMP_Text multiplierText;
+	[Tooltip("If true the bar stays visible permanently (use in day scene)")]
+	public bool alwaysVisible = false;
 
     float _timer = 0f;
 
@@ -18,11 +20,22 @@ public class AnimosityBar : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        animosityBarUI.SetActive(false);
+        animosityBarUI.SetActive(alwaysVisible);
+
+        // Restore persisted value from GameManager
+        if (GameManager.Instance != null)
+        {
+            value = GameManager.Instance.animosity;
+            fill.fillAmount = value;
+            animosityText.text = $"{Mathf.RoundToInt(value * 100)}%";
+            float multiplier = Mathf.Lerp(0.5f, 1.5f, value);
+            multiplierText.text = $"{Mathf.RoundToInt(multiplier * 100)}%";
+        }
     }
 
     void Update()
     {
+        if (alwaysVisible) return;   // day scene: never auto-hide
         if (!animosityBarUI.activeSelf) return;
 
         _timer -= Time.deltaTime;
@@ -39,8 +52,11 @@ public class AnimosityBar : MonoBehaviour
 		GameManager.Instance.animosity = value; // In the demo there are enough enemies during a single night to observe the effects of animosity from 0 to 100
 		animosityText.text = $"{Mathf.RoundToInt(value * 100)}%";
 
-		animosityBarUI.SetActive(true);
-		_timer = hideDelay;
+		if (!alwaysVisible)
+		{
+			animosityBarUI.SetActive(true);
+			_timer = hideDelay;
+		}
 
 		float multiplier = Mathf.Lerp(0.5f, 1.5f, value);
 		multiplierText.text = $"{Mathf.RoundToInt(multiplier * 100)}%";

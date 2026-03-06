@@ -1,11 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
     public float health = 100f;
+    public float healthMultiplier = 1f;
     public float destroyDelay = 3f;
-
+    
+    private bool health_increased;
     private bool dead;
     private Animator animator;
 
@@ -17,17 +20,34 @@ public class EnemyHealth : MonoBehaviour
             GetComponentInParent<Animator>();
     }
 
-    public void TakeDamage(float dmg)
+    public void SetMultiplier(float multiplier)
     {
-        if (dead) return;
-
-        health -= dmg;
-        if (health <= 0) Die();
+        healthMultiplier = multiplier;
     }
+
+    public void TakeDamage(float dmg)
+{
+    if (dead) return;
+
+    if (!health_increased)
+    {
+        health *= healthMultiplier;
+        health_increased = true;
+    }
+
+    health -= dmg;
+
+    if (health <= 0)
+        Die();
+}
 
     void Die()
     {
         dead = true;
+
+        float newAnimosityValue = AnimosityBar.Instance.value + 0.1f;
+        
+        AnimosityBar.Instance.SetAnimosity(newAnimosityValue);
 
         animator?.SetTrigger("Die");
 

@@ -10,6 +10,7 @@ public class EnemyAStarAI : MonoBehaviour
     public float attackRange = 1.6f;
     public float attackCooldown = 1f;
     public float attackDamage = 15f;
+    public float attackMultiplier = 1f;
 
     private NavMeshAgent agent;
     private Transform target;
@@ -18,6 +19,11 @@ public class EnemyAStarAI : MonoBehaviour
 
     private float repathTimer;
     private float attackTimer;
+
+    public void SetMultiplier(float multiplier)
+    {
+        attackMultiplier = multiplier;
+    }
 
     void Awake()
     {
@@ -78,7 +84,7 @@ public class EnemyAStarAI : MonoBehaviour
             if (attackTimer <= 0f)
             {
                 animator?.SetTrigger("Attack");
-                targetHealth?.TakeDamage(attackDamage);
+                targetHealth?.TakeDamage(attackDamage * attackMultiplier);
                 attackTimer = attackCooldown;
             }
         }

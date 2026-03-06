@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     public int playerHealth = 100;
     public int playerHunger = 100;
-    public int score = 0;
+    public float animosity = 0f;
 
     private void Awake()
     {
